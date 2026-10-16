@@ -104,6 +104,7 @@ def simulate(
 
     t0 = float(times[0])
     t1 = float(times[-1])
+    excitation.validate_interval(t0, t1)
     plan = _segment_plan(config, t0, t1)
     retune_log = [
         {"t": ev.t, "path": ev.path, "value": ev.value}

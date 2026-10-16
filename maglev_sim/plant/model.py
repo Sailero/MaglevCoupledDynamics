@@ -9,7 +9,7 @@ from numpy.typing import NDArray
 
 from maglev_sim.plant.config import Config
 from maglev_sim.plant.control.gap_pid import get_controller
-from maglev_sim.plant.excitation import Excitation
+from maglev_sim.plant.excitation import Excitation, _build_irregularity
 from maglev_sim.plant.physics.beam import BeamModes
 from maglev_sim.plant.physics.magnet import gap_raw, magnetic_force
 from maglev_sim.plant.physics.vehicle import vehicle_accelerations
@@ -54,7 +54,7 @@ def _kinematics(
     u = layout.unpack(state)
     xi = excitation.position(t)
     speed = excitation.speed(t)
-    r = excitation.irregularity_value(xi)
+    r = excitation.irregularity_value(xi, t)
     w = beam.displacement(xi, u["q"])
     w_dot = beam.material_velocity(xi, u["q"], u["p"], speed)
     gap = gap_raw(u["z_m"], r, w, config.magnet.delta_0)
@@ -97,6 +97,7 @@ def equilibrium(
     config: Config,
     position: float | None = None,
     irregularity_value: float | None = None,
+    excitation: Excitation | None = None,
 ) -> NDArray[np.float64]:
     """Closed-form static equilibrium of the truncated modal model (doc 3.6)."""
     config.validate()
@@ -104,7 +105,12 @@ def equilibrium(
     beam = BeamModes.from_config(config.beam)
     xi = config.motion.xi if position is None else float(position)
     if irregularity_value is None:
-        r = Excitation.from_config(config).irregularity_value(xi)
+        if excitation is not None:
+            r = excitation.irregularity_value(xi, config.output.t_start)
+        else:
+            r_fn, _ = _build_irregularity(config.irregularity)
+            coordinate = config.output.t_start if config.irregularity.type == 'time_series' else xi
+            r = float(r_fn(coordinate))
     else:
         r = float(irregularity_value)
     q = beam.static_modal_amplitudes(config.vehicle.F0, xi)
@@ -124,8 +130,8 @@ def equilibrium(
     )
 
 
-def initial_state(config: Config, seed: int | None = None) -> NDArray[np.float64]:
-    y0 = equilibrium(config)
+def initial_state(config: Config, seed: int | None = None, *, excitation: Excitation | None = None) -> NDArray[np.float64]:
+    y0 = equilibrium(config, excitation=excitation)
     layout = layout_from_config(config)
     if config.initial.delta:
         y0 = apply_delta(y0, layout, config.initial.delta)

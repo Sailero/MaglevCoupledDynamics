@@ -10,7 +10,7 @@
 ## 架构
 
 ```
-python -m maglev_sim          # 唯一对外入口
+python -m maglev_sim          # 原有通用生成入口
         │
         ▼
    maglev_sim/due.py          # 写出 Y、U
@@ -25,7 +25,13 @@ python -m maglev_sim          # 唯一对外入口
 | 对外 | `maglev_sim/due.py`、`plot.py`、`cli.py` | 生成、读取、画 DUE 张量 |
 | 对内 | `maglev_sim/plant/` | 磁浮–梁闭环积分，不进入 NPZ |
 
-公开接口只有：`generate_due_dataset`、`load_due_dataset`、`plot_due_dataset`、`load_config`。
+原有公开接口为：`generate_due_dataset`、`load_due_dataset`、`plot_due_dataset`、`load_config`。
+
+另有标准化 benchmark 生成入口 `python -m maglev_sim.benchmark`，支持时变输入、
+数值收敛检查、ID/OOD 数据划分与断点续跑；`scripts/extend_benchmark.py` 可扩充独立轨迹。
+文件职责、生成命令和 DUE 使用方式见 [benchmark 文档](docs/benchmark.md)。
+本地 `data/due_v2_benchmark/` 和 `data/due_large_10000/` 使用这套流程；
+DUE 训练只需读取生成好的 NPZ，无需调用 benchmark 代码。
 
 ## DUE 文件里有什么
 

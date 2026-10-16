@@ -10,11 +10,15 @@ from numpy.typing import NDArray
 from maglev_sim.plant.config import Config, ForceConfig, IrregularityConfig, MotionConfig
 
 
-def _as_interp(t: NDArray[np.float64], y: NDArray[np.float64]):
+def _as_interp(t: NDArray[np.float64], y: NDArray[np.float64], *, strict=False):
     t = np.asarray(t, dtype=float)
     y = np.asarray(y, dtype=float)
-    if t.size != y.size or t.size < 2:
+    if t.ndim != 1 or y.ndim != 1 or t.size != y.size or t.size < 2:
         raise ValueError("precomputed force series must have length >= 2")
+    if not np.isfinite(t).all() or not np.isfinite(y).all():
+        raise ValueError("interpolation arrays must be finite")
+    if strict and np.any(np.diff(t) <= 0):
+        raise ValueError("time knots must be strictly increasing")
     order = np.argsort(t)
     t = t[order]
     y = y[order]
@@ -39,6 +43,15 @@ class Excitation:
 
     @classmethod
     def from_config(cls, config: Config, seed: int | None = None) -> Excitation:
+        for spec, kind in ((config.irregularity, 'time_series'), (config.force, 'precomputed')):
+            if spec.type == kind and spec.t is not None:
+                times = np.asarray(spec.t, dtype=float)
+                if times.ndim != 1 or times.size < 2 or not np.isfinite(times).all():
+                    raise ValueError('time knots must be finite 1-D arrays of length >= 2')
+                if np.any(np.diff(times) <= 0):
+                    raise ValueError('time knots must be strictly increasing')
+                if times[0] > config.output.t_start or times[-1] < config.output.t_end:
+                    raise ValueError('time series must cover the integration interval')
         force_fn = _build_force(config.force, config.output.t_end, seed)
         r_fn, dr_fn = _build_irregularity(config.irregularity)
         return cls(
@@ -62,8 +75,18 @@ class Excitation:
             return 0.0
         return float(self.motion.v)
 
-    def irregularity_value(self, xi: float) -> float:
+    def irregularity_value(self, xi: float, t: float | None = None) -> float:
+        if self.irregularity.type == 'time_series':
+            if t is None:
+                raise ValueError('time_series irregularity requires time t')
+            return float(self._r_fn(t))
         return float(self._r_fn(xi))  # type: ignore[misc]
+
+    def validate_interval(self, t0: float, t1: float) -> None:
+        for spec, kind in ((self.irregularity, 'time_series'), (self.force, 'precomputed')):
+            if spec.type == kind and spec.t is not None:
+                if spec.t[0] > t0 or spec.t[-1] < t1:
+                    raise ValueError('time series must cover the integration interval')
 
     def irregularity_slope(self, xi: float) -> float:
         return float(self._dr_fn(xi))  # type: ignore[misc]
@@ -111,6 +134,8 @@ def _build_force(force: ForceConfig, t_end: float, seed: int | None):
         t0, t1 = force.t_start, force.t_end
         return lambda t, amp=amp, t0=t0, t1=t1: amp if t0 <= t <= t1 else 0.0
     if kind == "precomputed":
+        if (force.t is None) != (force.P is None):
+            raise ValueError('precomputed force requires both t and P arrays')
         if force.t is None or force.P is None:
             used_seed = force.seed if force.seed is not None else seed
             if used_seed is None:
@@ -120,12 +145,16 @@ def _build_force(force: ForceConfig, t_end: float, seed: int | None):
             rng = np.random.default_rng(used_seed)
             P = force.amplitude * rng.standard_normal(t.size)
             return _as_interp(t, P)
-        return _as_interp(np.asarray(force.t), np.asarray(force.P))
+        return _as_interp(np.asarray(force.t), np.asarray(force.P), strict=True)
     raise ValueError(f"unknown force type {kind!r}")
 
 
 def _build_irregularity(spec: IrregularityConfig):
     kind = spec.type
+    if kind == 'time_series':
+        if spec.t is None or spec.r is None:
+            raise ValueError('time_series irregularity needs t and r')
+        return _as_interp(np.asarray(spec.t), np.asarray(spec.r), strict=True), lambda xi: 0.0
     if kind in {"constant", None, ""}:
         value = float(spec.value)
         return (lambda xi, value=value: value, lambda xi: 0.0)

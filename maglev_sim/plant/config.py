@@ -156,6 +156,7 @@ class IrregularityConfig:
     wavelength: float = 8.0
     phase: float = 0.0
     x: list[float] | None = None
+    t: list[float] | None = None
     r: list[float] | None = None
 
     def __post_init__(self) -> None:
