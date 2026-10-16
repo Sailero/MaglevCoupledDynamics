@@ -1,0 +1,2423 @@
+{
+  "passed": true,
+  "seed": 20261016,
+  "duration_s": 10.0,
+  "fit_interval_s": [
+    2.0,
+    9.5
+  ],
+  "cases": [
+    {
+      "gain_v_a": 65.0,
+      "n_modes": 1,
+      "config": {
+        "meta": {
+          "model_version": "stationary_two_point_v2",
+          "parameter_source": "Wang_mechanics_Li_control_attachment_parameters",
+          "notes": "三自由度机械与 Li 电流回路的组合算例。m3 采用附件 330 kg；王珊表1为450 kg。",
+          "sources": {
+            "mechanics": "Wang et al. 2026, DOI:10.16385/j.cnki.issn.1004-4523.202508057, Eq.(3)",
+            "circuit_and_beam": "Li et al. 2015, DOI:10.1155/2015/709583, Eqs.(6)-(19)",
+            "parameters": "docs/references/two_point_original_matlab.txt；MATLAB R2024a与独立SciPy基线已核对，m3采用330 kg",
+            "beam": "original repository 11098d1: L=24 m, mu=400 kg/m, EI=1.68e9 N m^2",
+            "positions": "本项目计算选择；点1为后点、点2为前点"
+          }
+        },
+        "geometry": {
+          "positions_m": [
+            9.6,
+            14.4
+          ]
+        },
+        "vehicle": {
+          "m1_kg": 300.0,
+          "m2_kg": 300.0,
+          "m3_kg": 330.0,
+          "m4_kg": 2437.5,
+          "stiffness_n_m": [
+            20000000.0,
+            20000000.0
+          ],
+          "damping_ns_m": [
+            5000.0,
+            5000.0
+          ],
+          "gravity": 9.81
+        },
+        "beam": {
+          "enabled": true,
+          "n_modes": 1,
+          "length_m": 24.0,
+          "mass_per_length": 400.0,
+          "f1_hz": 5.588844660540809,
+          "damping_ratio": 0.02
+        },
+        "magnet": {
+          "mu0": 1.2566370614359173e-06,
+          "turns": 270,
+          "pole_area_m2": 0.115,
+          "gap_m": 0.01,
+          "gap_min_m": 0.001,
+          "gap_max_m": 0.025,
+          "gap_floor_m": 1e-06,
+          "current_min_a": 0.0,
+          "current_max_a": 60.0
+        },
+        "controller": {
+          "kp_a_m": 5500.0,
+          "kd_as_m": 50.0,
+          "current_gain_v_a": 65.0
+        },
+        "time": {
+          "dt": 0.001,
+          "n_steps": 10001
+        },
+        "integrator": {
+          "method": "Radau",
+          "rtol": 1e-08,
+          "scaled_atol": 1e-11,
+          "max_step": 0.0005
+        },
+        "initial": {
+          "offsets": {},
+          "random_std": {
+            "z_m1": 1e-05,
+            "z_m2": 1e-05,
+            "z_c": 1e-05,
+            "q1": 1e-05
+          }
+        },
+        "excitation": {
+          "type": "none",
+          "amplitudes_n": [
+            0.0,
+            0.0
+          ],
+          "start_s": 2.0,
+          "duration_s": 0.1
+        },
+        "dataset": {
+          "name": "stationary_two_point",
+          "n_samples": 4,
+          "seed": 20261016,
+          "dtype": "float64",
+          "plot": true,
+          "split_fractions": [
+            0.7,
+            0.15,
+            0.15
+          ],
+          "split_seed": 20261016,
+          "split_by": "trajectory",
+          "parameter_ranges": {},
+          "n_parameter_families": 4
+        },
+        "validation": {
+          "model": true,
+          "solver": true,
+          "dataset": true,
+          "scientific": true,
+          "duration_s": 10.0,
+          "fit_start_s": 2.0,
+          "fit_end_s": 9.5,
+          "gains_v_a": [
+            65.0,
+            80.0
+          ],
+          "seed": 20261016
+        }
+      },
+      "initial_state": [
+        -1.3753949938835243e-05,
+        1.0366591657609076e-05,
+        2.8826042099494687e-08,
+        0.0,
+        0.0,
+        0.0,
+        -1.915440874331477e-05,
+        0.0,
+        25.042961588229478,
+        25.042961588229478
+      ],
+      "rigid_eigenvalues": [
+        [
+          -106.74308586374103,
+          0.0
+        ],
+        [
+          -95.53787364310756,
+          0.0
+        ],
+        [
+          -16.74967104734301,
+          -320.9382708602268
+        ],
+        [
+          -16.74967104734301,
+          320.9382708602268
+        ],
+        [
+          -16.660790228344197,
+          -303.34591606499004
+        ],
+        [
+          -16.660790228344197,
+          303.34591606499004
+        ],
+        [
+          -7.320410024831919,
+          -48.242671227074915
+        ],
+        [
+          -7.320410024831919,
+          48.242671227074915
+        ]
+      ],
+      "rigid_spectral_abscissa_per_s": -7.320410024831919,
+      "coupled_eigenvalues": [
+        [
+          -106.74308586374093,
+          0.0
+        ],
+        [
+          -106.71758915770154,
+          0.0
+        ],
+        [
+          -16.660790228344204,
+          -303.3459160649899
+        ],
+        [
+          -16.660790228344204,
+          303.3459160649899
+        ],
+        [
+          -16.568384115781114,
+          -321.0088522383576
+        ],
+        [
+          -16.568384115781114,
+          321.0088522383576
+        ],
+        [
+          -2.839983978034909,
+          -25.688735687809917
+        ],
+        [
+          -2.839983978034909,
+          25.688735687809917
+        ],
+        [
+          0.2258298458336485,
+          -62.71627451278438
+        ],
+        [
+          0.2258298458336485,
+          62.71627451278438
+        ]
+      ],
+      "coupled_spectral_abscissa_per_s": 0.2258298458336485,
+      "fit": {
+        "linear_eigenvalue": [
+          0.22582984583375004,
+          62.7162745127843
+        ],
+        "linear_frequency_hz": 9.981605101017871,
+        "projected_alpha_per_s": 0.22587509025302652,
+        "projected_frequency_hz": 9.981534233559298,
+        "alpha_absolute_error_per_s": 4.524441927647449e-05,
+        "frequency_absolute_error_hz": 7.086745857343146e-05,
+        "ordinary_signal_fit": {
+          "signal": "q1_absolute_peaks",
+          "n_peaks": 150,
+          "alpha_per_s": 0.22588143172176944,
+          "frequency_hz": 9.981243301178992
+        },
+        "projection_eigenvector_condition": 11.918784811454055,
+        "fit_start_s": 2.0,
+        "fit_end_s": 9.5,
+        "fit_n_samples": 7501
+      },
+      "energy": {
+        "point_modal_power_max_difference_w": 8.881784197001252e-16,
+        "beam_derivative_balance_max_difference_w": 6.88338275267597e-14,
+        "reported_beam_derivative_max_difference_w": 1.3322676295501878e-15,
+        "beam_power_relative_residual": 1.8214237790935928e-14,
+        "mechanical_balance_max_difference_w": 1.270095140171179e-13,
+        "reported_mechanical_derivative_max_difference_w": 2.6645352591003757e-15,
+        "mechanical_balance_relative_residual": 1.898617147999073e-14,
+        "beam_energy_initial_j": 0.0010858068007982891,
+        "beam_energy_final_j": 0.08206212810594277,
+        "beam_energy_change_j": 0.08097632130514448,
+        "integrated_net_beam_power_j": 0.0809763555407256,
+        "energy_integral_difference_j": -3.423558112003455e-08,
+        "energy_integral_relative_difference": 4.1602587494291487e-07,
+        "magnetic_work_j": 0.3398491728377102,
+        "external_work_j": 0.0,
+        "beam_dissipated_energy_j": 0.25887281729698464,
+        "fit_mean_magnetic_power_w": 0.03554218361333602,
+        "fit_mean_beam_dissipation_w": 0.026900550884244253
+      },
+      "gap_min_m": 0.00983708601846624,
+      "gap_max_m": 0.01016217191420101
+    },
+    {
+      "gain_v_a": 65.0,
+      "n_modes": 2,
+      "config": {
+        "meta": {
+          "model_version": "stationary_two_point_v2",
+          "parameter_source": "Wang_mechanics_Li_control_attachment_parameters",
+          "notes": "三自由度机械与 Li 电流回路的组合算例。m3 采用附件 330 kg；王珊表1为450 kg。",
+          "sources": {
+            "mechanics": "Wang et al. 2026, DOI:10.16385/j.cnki.issn.1004-4523.202508057, Eq.(3)",
+            "circuit_and_beam": "Li et al. 2015, DOI:10.1155/2015/709583, Eqs.(6)-(19)",
+            "parameters": "docs/references/two_point_original_matlab.txt；MATLAB R2024a与独立SciPy基线已核对，m3采用330 kg",
+            "beam": "original repository 11098d1: L=24 m, mu=400 kg/m, EI=1.68e9 N m^2",
+            "positions": "本项目计算选择；点1为后点、点2为前点"
+          }
+        },
+        "geometry": {
+          "positions_m": [
+            9.6,
+            14.4
+          ]
+        },
+        "vehicle": {
+          "m1_kg": 300.0,
+          "m2_kg": 300.0,
+          "m3_kg": 330.0,
+          "m4_kg": 2437.5,
+          "stiffness_n_m": [
+            20000000.0,
+            20000000.0
+          ],
+          "damping_ns_m": [
+            5000.0,
+            5000.0
+          ],
+          "gravity": 9.81
+        },
+        "beam": {
+          "enabled": true,
+          "n_modes": 2,
+          "length_m": 24.0,
+          "mass_per_length": 400.0,
+          "f1_hz": 5.588844660540809,
+          "damping_ratio": 0.02
+        },
+        "magnet": {
+          "mu0": 1.2566370614359173e-06,
+          "turns": 270,
+          "pole_area_m2": 0.115,
+          "gap_m": 0.01,
+          "gap_min_m": 0.001,
+          "gap_max_m": 0.025,
+          "gap_floor_m": 1e-06,
+          "current_min_a": 0.0,
+          "current_max_a": 60.0
+        },
+        "controller": {
+          "kp_a_m": 5500.0,
+          "kd_as_m": 50.0,
+          "current_gain_v_a": 65.0
+        },
+        "time": {
+          "dt": 0.001,
+          "n_steps": 10001
+        },
+        "integrator": {
+          "method": "Radau",
+          "rtol": 1e-08,
+          "scaled_atol": 1e-11,
+          "max_step": 0.0005
+        },
+        "initial": {
+          "offsets": {},
+          "random_std": {
+            "z_m1": 1e-05,
+            "z_m2": 1e-05,
+            "z_c": 1e-05,
+            "q1": 1e-05,
+            "q2": 1e-05
+          }
+        },
+        "excitation": {
+          "type": "none",
+          "amplitudes_n": [
+            0.0,
+            0.0
+          ],
+          "start_s": 2.0,
+          "duration_s": 0.1
+        },
+        "dataset": {
+          "name": "stationary_two_point",
+          "n_samples": 4,
+          "seed": 20261016,
+          "dtype": "float64",
+          "plot": true,
+          "split_fractions": [
+            0.7,
+            0.15,
+            0.15
+          ],
+          "split_seed": 20261016,
+          "split_by": "trajectory",
+          "parameter_ranges": {},
+          "n_parameter_families": 4
+        },
+        "validation": {
+          "model": true,
+          "solver": true,
+          "dataset": true,
+          "scientific": true,
+          "duration_s": 10.0,
+          "fit_start_s": 2.0,
+          "fit_end_s": 9.5,
+          "gains_v_a": [
+            65.0,
+            80.0
+          ],
+          "seed": 20261016
+        }
+      },
+      "initial_state": [
+        -1.3753949938835243e-05,
+        1.0366591657609076e-05,
+        2.8826042099494687e-08,
+        0.0,
+        0.0,
+        0.0,
+        -1.915440874331477e-05,
+        -1.2155411769132844e-05,
+        0.0,
+        0.0,
+        25.042961588229478,
+        25.042961588229478
+      ],
+      "rigid_eigenvalues": [
+        [
+          -106.74308586374103,
+          0.0
+        ],
+        [
+          -95.53787364310756,
+          0.0
+        ],
+        [
+          -16.74967104734301,
+          -320.9382708602268
+        ],
+        [
+          -16.74967104734301,
+          320.9382708602268
+        ],
+        [
+          -16.660790228344197,
+          -303.34591606499004
+        ],
+        [
+          -16.660790228344197,
+          303.34591606499004
+        ],
+        [
+          -7.320410024831919,
+          -48.242671227074915
+        ],
+        [
+          -7.320410024831919,
+          48.242671227074915
+        ]
+      ],
+      "rigid_spectral_abscissa_per_s": -7.320410024831919,
+      "coupled_eigenvalues": [
+        [
+          -108.4767726199826,
+          0.0
+        ],
+        [
+          -106.7175891577016,
+          0.0
+        ],
+        [
+          -16.568384115781072,
+          -321.00885223835763
+        ],
+        [
+          -16.568384115781072,
+          321.00885223835763
+        ],
+        [
+          -16.539299447572304,
+          -303.392747364517
+        ],
+        [
+          -16.539299447572304,
+          303.392747364517
+        ],
+        [
+          -2.8399839780349097,
+          -25.68873568780985
+        ],
+        [
+          -2.8399839780349097,
+          25.68873568780985
+        ],
+        [
+          -2.0639071350686535,
+          -140.96964384894676
+        ],
+        [
+          -2.0639071350686535,
+          140.96964384894676
+        ],
+        [
+          0.22582984583371535,
+          -62.71627451278447
+        ],
+        [
+          0.22582984583371535,
+          62.71627451278447
+        ]
+      ],
+      "coupled_spectral_abscissa_per_s": 0.22582984583371535,
+      "fit": {
+        "linear_eigenvalue": [
+          0.2258298458337228,
+          62.71627451278433
+        ],
+        "linear_frequency_hz": 9.981605101017877,
+        "projected_alpha_per_s": 0.2258750877222905,
+        "projected_frequency_hz": 9.981534234618747,
+        "alpha_absolute_error_per_s": 4.524188856772082e-05,
+        "frequency_absolute_error_hz": 7.086639912934345e-05,
+        "ordinary_signal_fit": {
+          "signal": "q1_absolute_peaks",
+          "n_peaks": 150,
+          "alpha_per_s": 0.22588140866146078,
+          "frequency_hz": 9.981243301178992
+        },
+        "projection_eigenvector_condition": 11.91878481145402,
+        "fit_start_s": 2.0,
+        "fit_end_s": 9.5,
+        "fit_n_samples": 7501
+      },
+      "energy": {
+        "point_modal_power_max_difference_w": 8.881784197001252e-16,
+        "beam_derivative_balance_max_difference_w": 5.906386491005833e-14,
+        "reported_beam_derivative_max_difference_w": 1.3322676295501878e-15,
+        "beam_power_relative_residual": 1.562943130396861e-14,
+        "mechanical_balance_max_difference_w": 1.0835776720341528e-13,
+        "reported_mechanical_derivative_max_difference_w": 3.552713678800501e-15,
+        "mechanical_balance_relative_residual": 1.6198358823601332e-14,
+        "beam_energy_initial_j": 0.00808220290426408,
+        "beam_energy_final_j": 0.08205253399788504,
+        "beam_energy_change_j": 0.07397033109362096,
+        "integrated_net_beam_power_j": 0.07397033260865457,
+        "energy_integral_difference_j": -1.5150336124536423e-09,
+        "energy_integral_relative_difference": 1.8410900858356398e-08,
+        "magnetic_work_j": 0.3437210056430981,
+        "external_work_j": 0.0,
+        "beam_dissipated_energy_j": 0.2697506730344435,
+        "fit_mean_magnetic_power_w": 0.03554089008989516,
+        "fit_mean_beam_dissipation_w": 0.026900383076941037
+      },
+      "gap_min_m": 0.00983708883779228,
+      "gap_max_m": 0.010162169512211354
+    },
+    {
+      "gain_v_a": 80.0,
+      "n_modes": 1,
+      "config": {
+        "meta": {
+          "model_version": "stationary_two_point_v2",
+          "parameter_source": "Wang_mechanics_Li_control_attachment_parameters",
+          "notes": "三自由度机械与 Li 电流回路的组合算例。m3 采用附件 330 kg；王珊表1为450 kg。",
+          "sources": {
+            "mechanics": "Wang et al. 2026, DOI:10.16385/j.cnki.issn.1004-4523.202508057, Eq.(3)",
+            "circuit_and_beam": "Li et al. 2015, DOI:10.1155/2015/709583, Eqs.(6)-(19)",
+            "parameters": "docs/references/two_point_original_matlab.txt；MATLAB R2024a与独立SciPy基线已核对，m3采用330 kg",
+            "beam": "original repository 11098d1: L=24 m, mu=400 kg/m, EI=1.68e9 N m^2",
+            "positions": "本项目计算选择；点1为后点、点2为前点"
+          }
+        },
+        "geometry": {
+          "positions_m": [
+            9.6,
+            14.4
+          ]
+        },
+        "vehicle": {
+          "m1_kg": 300.0,
+          "m2_kg": 300.0,
+          "m3_kg": 330.0,
+          "m4_kg": 2437.5,
+          "stiffness_n_m": [
+            20000000.0,
+            20000000.0
+          ],
+          "damping_ns_m": [
+            5000.0,
+            5000.0
+          ],
+          "gravity": 9.81
+        },
+        "beam": {
+          "enabled": true,
+          "n_modes": 1,
+          "length_m": 24.0,
+          "mass_per_length": 400.0,
+          "f1_hz": 5.588844660540809,
+          "damping_ratio": 0.02
+        },
+        "magnet": {
+          "mu0": 1.2566370614359173e-06,
+          "turns": 270,
+          "pole_area_m2": 0.115,
+          "gap_m": 0.01,
+          "gap_min_m": 0.001,
+          "gap_max_m": 0.025,
+          "gap_floor_m": 1e-06,
+          "current_min_a": 0.0,
+          "current_max_a": 60.0
+        },
+        "controller": {
+          "kp_a_m": 5500.0,
+          "kd_as_m": 50.0,
+          "current_gain_v_a": 80.0
+        },
+        "time": {
+          "dt": 0.001,
+          "n_steps": 10001
+        },
+        "integrator": {
+          "method": "Radau",
+          "rtol": 1e-08,
+          "scaled_atol": 1e-11,
+          "max_step": 0.0005
+        },
+        "initial": {
+          "offsets": {},
+          "random_std": {
+            "z_m1": 1e-05,
+            "z_m2": 1e-05,
+            "z_c": 1e-05,
+            "q1": 1e-05
+          }
+        },
+        "excitation": {
+          "type": "none",
+          "amplitudes_n": [
+            0.0,
+            0.0
+          ],
+          "start_s": 2.0,
+          "duration_s": 0.1
+        },
+        "dataset": {
+          "name": "stationary_two_point",
+          "n_samples": 4,
+          "seed": 20261016,
+          "dtype": "float64",
+          "plot": true,
+          "split_fractions": [
+            0.7,
+            0.15,
+            0.15
+          ],
+          "split_seed": 20261016,
+          "split_by": "trajectory",
+          "parameter_ranges": {},
+          "n_parameter_families": 4
+        },
+        "validation": {
+          "model": true,
+          "solver": true,
+          "dataset": true,
+          "scientific": true,
+          "duration_s": 10.0,
+          "fit_start_s": 2.0,
+          "fit_end_s": 9.5,
+          "gains_v_a": [
+            65.0,
+            80.0
+          ],
+          "seed": 20261016
+        }
+      },
+      "initial_state": [
+        -1.3753949938835243e-05,
+        1.0366591657609076e-05,
+        2.8826042099494687e-08,
+        0.0,
+        0.0,
+        0.0,
+        -1.915440874331477e-05,
+        0.0,
+        25.042961588229478,
+        25.042961588229478
+      ],
+      "rigid_eigenvalues": [
+        [
+          -124.83500229759211,
+          0.0
+        ],
+        [
+          -111.64005760276356,
+          0.0
+        ],
+        [
+          -21.85306274069898,
+          -310.89373186048624
+        ],
+        [
+          -21.85306274069898,
+          310.89373186048624
+        ],
+        [
+          -21.126285297723328,
+          -327.43121989661597
+        ],
+        [
+          -21.126285297723328,
+          327.43121989661597
+        ],
+        [
+          -9.130934523903868,
+          -48.191653296280144
+        ],
+        [
+          -9.130934523903868,
+          48.191653296280144
+        ]
+      ],
+      "rigid_spectral_abscissa_per_s": -9.130934523903868,
+      "coupled_eigenvalues": [
+        [
+          -124.83500229759196,
+          0.0
+        ],
+        [
+          -122.70589705528207,
+          0.0
+        ],
+        [
+          -21.853062740699066,
+          -310.8937318604863
+        ],
+        [
+          -21.853062740699066,
+          310.8937318604863
+        ],
+        [
+          -20.889278084949844,
+          -327.5495709978955
+        ],
+        [
+          -20.889278084949844,
+          327.5495709978955
+        ],
+        [
+          -2.9227000970767727,
+          -25.693085284123626
+        ],
+        [
+          -2.9227000970767727,
+          25.693085284123626
+        ],
+        [
+          -1.6146368464456753,
+          -63.49288869759315
+        ],
+        [
+          -1.6146368464456753,
+          63.49288869759315
+        ]
+      ],
+      "coupled_spectral_abscissa_per_s": -1.6146368464456753,
+      "fit": {
+        "linear_eigenvalue": [
+          -1.6146368464458098,
+          63.49288869759313
+        ],
+        "linear_frequency_hz": 10.10520708740548,
+        "projected_alpha_per_s": -1.6146368172780445,
+        "projected_frequency_hz": 10.105207088650236,
+        "alpha_absolute_error_per_s": 2.9167765314142002e-08,
+        "frequency_absolute_error_hz": 1.2447554098571345e-09,
+        "ordinary_signal_fit": {
+          "signal": "q1_absolute_peaks",
+          "n_peaks": 151,
+          "alpha_per_s": -1.6146661183115991,
+          "frequency_hz": 10.106454655706779
+        },
+        "projection_eigenvector_condition": 12.808008560120136,
+        "fit_start_s": 2.0,
+        "fit_end_s": 9.5,
+        "fit_n_samples": 7501
+      },
+      "energy": {
+        "point_modal_power_max_difference_w": 1.3877787807814457e-17,
+        "beam_derivative_balance_max_difference_w": 8.520961713998076e-15,
+        "reported_beam_derivative_max_difference_w": 2.0816681711721685e-17,
+        "beam_power_relative_residual": 1.5011487697802428e-13,
+        "mechanical_balance_max_difference_w": 1.6417422976644502e-14,
+        "reported_mechanical_derivative_max_difference_w": 8.326672684688674e-17,
+        "mechanical_balance_relative_residual": 4.0966160288079644e-14,
+        "beam_energy_initial_j": 0.0010858068007982891,
+        "beam_energy_final_j": 3.221456823488596e-18,
+        "beam_energy_change_j": -0.001085806800798286,
+        "integrated_net_beam_power_j": -0.0010858109829046656,
+        "energy_integral_difference_j": 4.182106379735026e-09,
+        "energy_integral_relative_difference": 2.3714997664286616e-06,
+        "magnetic_work_j": -0.0005956555886518988,
+        "external_work_j": 0.0,
+        "beam_dissipated_energy_j": 0.0004901553942527668,
+        "fit_mean_magnetic_power_w": -4.9191489195480593e-08,
+        "fit_mean_beam_dissipation_w": 9.397183619511948e-08
+      },
+      "gap_min_m": 0.00997832140759384,
+      "gap_max_m": 0.01002858351690872
+    },
+    {
+      "gain_v_a": 80.0,
+      "n_modes": 2,
+      "config": {
+        "meta": {
+          "model_version": "stationary_two_point_v2",
+          "parameter_source": "Wang_mechanics_Li_control_attachment_parameters",
+          "notes": "三自由度机械与 Li 电流回路的组合算例。m3 采用附件 330 kg；王珊表1为450 kg。",
+          "sources": {
+            "mechanics": "Wang et al. 2026, DOI:10.16385/j.cnki.issn.1004-4523.202508057, Eq.(3)",
+            "circuit_and_beam": "Li et al. 2015, DOI:10.1155/2015/709583, Eqs.(6)-(19)",
+            "parameters": "docs/references/two_point_original_matlab.txt；MATLAB R2024a与独立SciPy基线已核对，m3采用330 kg",
+            "beam": "original repository 11098d1: L=24 m, mu=400 kg/m, EI=1.68e9 N m^2",
+            "positions": "本项目计算选择；点1为后点、点2为前点"
+          }
+        },
+        "geometry": {
+          "positions_m": [
+            9.6,
+            14.4
+          ]
+        },
+        "vehicle": {
+          "m1_kg": 300.0,
+          "m2_kg": 300.0,
+          "m3_kg": 330.0,
+          "m4_kg": 2437.5,
+          "stiffness_n_m": [
+            20000000.0,
+            20000000.0
+          ],
+          "damping_ns_m": [
+            5000.0,
+            5000.0
+          ],
+          "gravity": 9.81
+        },
+        "beam": {
+          "enabled": true,
+          "n_modes": 2,
+          "length_m": 24.0,
+          "mass_per_length": 400.0,
+          "f1_hz": 5.588844660540809,
+          "damping_ratio": 0.02
+        },
+        "magnet": {
+          "mu0": 1.2566370614359173e-06,
+          "turns": 270,
+          "pole_area_m2": 0.115,
+          "gap_m": 0.01,
+          "gap_min_m": 0.001,
+          "gap_max_m": 0.025,
+          "gap_floor_m": 1e-06,
+          "current_min_a": 0.0,
+          "current_max_a": 60.0
+        },
+        "controller": {
+          "kp_a_m": 5500.0,
+          "kd_as_m": 50.0,
+          "current_gain_v_a": 80.0
+        },
+        "time": {
+          "dt": 0.001,
+          "n_steps": 10001
+        },
+        "integrator": {
+          "method": "Radau",
+          "rtol": 1e-08,
+          "scaled_atol": 1e-11,
+          "max_step": 0.0005
+        },
+        "initial": {
+          "offsets": {},
+          "random_std": {
+            "z_m1": 1e-05,
+            "z_m2": 1e-05,
+            "z_c": 1e-05,
+            "q1": 1e-05,
+            "q2": 1e-05
+          }
+        },
+        "excitation": {
+          "type": "none",
+          "amplitudes_n": [
+            0.0,
+            0.0
+          ],
+          "start_s": 2.0,
+          "duration_s": 0.1
+        },
+        "dataset": {
+          "name": "stationary_two_point",
+          "n_samples": 4,
+          "seed": 20261016,
+          "dtype": "float64",
+          "plot": true,
+          "split_fractions": [
+            0.7,
+            0.15,
+            0.15
+          ],
+          "split_seed": 20261016,
+          "split_by": "trajectory",
+          "parameter_ranges": {},
+          "n_parameter_families": 4
+        },
+        "validation": {
+          "model": true,
+          "solver": true,
+          "dataset": true,
+          "scientific": true,
+          "duration_s": 10.0,
+          "fit_start_s": 2.0,
+          "fit_end_s": 9.5,
+          "gains_v_a": [
+            65.0,
+            80.0
+          ],
+          "seed": 20261016
+        }
+      },
+      "initial_state": [
+        -1.3753949938835243e-05,
+        1.0366591657609076e-05,
+        2.8826042099494687e-08,
+        0.0,
+        0.0,
+        0.0,
+        -1.915440874331477e-05,
+        -1.2155411769132844e-05,
+        0.0,
+        0.0,
+        25.042961588229478,
+        25.042961588229478
+      ],
+      "rigid_eigenvalues": [
+        [
+          -124.83500229759211,
+          0.0
+        ],
+        [
+          -111.64005760276356,
+          0.0
+        ],
+        [
+          -21.85306274069898,
+          -310.89373186048624
+        ],
+        [
+          -21.85306274069898,
+          310.89373186048624
+        ],
+        [
+          -21.126285297723328,
+          -327.43121989661597
+        ],
+        [
+          -21.126285297723328,
+          327.43121989661597
+        ],
+        [
+          -9.130934523903868,
+          -48.191653296280144
+        ],
+        [
+          -9.130934523903868,
+          48.191653296280144
+        ]
+      ],
+      "rigid_spectral_abscissa_per_s": -9.130934523903868,
+      "coupled_eigenvalues": [
+        [
+          -126.67993051217827,
+          0.0
+        ],
+        [
+          -122.70589705528214,
+          0.0
+        ],
+        [
+          -21.69929284263268,
+          -310.96599423558484
+        ],
+        [
+          -21.69929284263268,
+          310.96599423558484
+        ],
+        [
+          -20.88927808494985,
+          -327.54957099789544
+        ],
+        [
+          -20.88927808494985,
+          327.54957099789544
+        ],
+        [
+          -2.9227000970767847,
+          -25.693085284123676
+        ],
+        [
+          -2.9227000970767847,
+          25.693085284123676
+        ],
+        [
+          -2.040565523190782,
+          -141.06243310507398
+        ],
+        [
+          -2.040565523190782,
+          141.06243310507398
+        ],
+        [
+          -1.614636846445729,
+          -63.4928886975931
+        ],
+        [
+          -1.614636846445729,
+          63.4928886975931
+        ]
+      ],
+      "coupled_spectral_abscissa_per_s": -1.614636846445729,
+      "fit": {
+        "linear_eigenvalue": [
+          -1.61463684644578,
+          63.49288869759311
+        ],
+        "linear_frequency_hz": 10.105207087405477,
+        "projected_alpha_per_s": -1.6146368371527726,
+        "projected_frequency_hz": 10.105207089662352,
+        "alpha_absolute_error_per_s": 9.293007474653336e-09,
+        "frequency_absolute_error_hz": 2.2568755753127334e-09,
+        "ordinary_signal_fit": {
+          "signal": "q1_absolute_peaks",
+          "n_peaks": 151,
+          "alpha_per_s": -1.6146607379346392,
+          "frequency_hz": 10.106454655706779
+        },
+        "projection_eigenvector_condition": 12.808008560120136,
+        "fit_start_s": 2.0,
+        "fit_end_s": 9.5,
+        "fit_n_samples": 7501
+      },
+      "energy": {
+        "point_modal_power_max_difference_w": 2.7755575615628914e-17,
+        "beam_derivative_balance_max_difference_w": 1.3655743202889425e-14,
+        "reported_beam_derivative_max_difference_w": 2.0816681711721685e-16,
+        "beam_power_relative_residual": 6.052417955303177e-14,
+        "mechanical_balance_max_difference_w": 1.8221535391660382e-14,
+        "reported_mechanical_derivative_max_difference_w": 2.0816681711721685e-16,
+        "mechanical_balance_relative_residual": 4.9655099620908486e-14,
+        "beam_energy_initial_j": 0.00808220290426408,
+        "beam_energy_final_j": 3.237221215041154e-18,
+        "beam_energy_change_j": -0.008082202904264077,
+        "integrated_net_beam_power_j": -0.008082248182249924,
+        "energy_integral_difference_j": 4.5277985846747804e-08,
+        "energy_integral_relative_difference": 4.967151486046797e-06,
+        "magnetic_work_j": 0.003457083142838592,
+        "external_work_j": 0.0,
+        "beam_dissipated_energy_j": 0.011539331325088517,
+        "fit_mean_magnetic_power_w": 6.632086481445663e-08,
+        "fit_mean_beam_dissipation_w": 5.092716556652885e-07
+      },
+      "gap_min_m": 0.009973742851398432,
+      "gap_max_m": 0.010023698405733578
+    }
+  ],
+  "step_halving": [
+    {
+      "gain_v_a": 65.0,
+      "base_max_step_s": 0.0005,
+      "refined_config": {
+        "meta": {
+          "model_version": "stationary_two_point_v2",
+          "parameter_source": "Wang_mechanics_Li_control_attachment_parameters",
+          "notes": "三自由度机械与 Li 电流回路的组合算例。m3 采用附件 330 kg；王珊表1为450 kg。",
+          "sources": {
+            "mechanics": "Wang et al. 2026, DOI:10.16385/j.cnki.issn.1004-4523.202508057, Eq.(3)",
+            "circuit_and_beam": "Li et al. 2015, DOI:10.1155/2015/709583, Eqs.(6)-(19)",
+            "parameters": "docs/references/two_point_original_matlab.txt；MATLAB R2024a与独立SciPy基线已核对，m3采用330 kg",
+            "beam": "original repository 11098d1: L=24 m, mu=400 kg/m, EI=1.68e9 N m^2",
+            "positions": "本项目计算选择；点1为后点、点2为前点"
+          }
+        },
+        "geometry": {
+          "positions_m": [
+            9.6,
+            14.4
+          ]
+        },
+        "vehicle": {
+          "m1_kg": 300.0,
+          "m2_kg": 300.0,
+          "m3_kg": 330.0,
+          "m4_kg": 2437.5,
+          "stiffness_n_m": [
+            20000000.0,
+            20000000.0
+          ],
+          "damping_ns_m": [
+            5000.0,
+            5000.0
+          ],
+          "gravity": 9.81
+        },
+        "beam": {
+          "enabled": true,
+          "n_modes": 2,
+          "length_m": 24.0,
+          "mass_per_length": 400.0,
+          "f1_hz": 5.588844660540809,
+          "damping_ratio": 0.02
+        },
+        "magnet": {
+          "mu0": 1.2566370614359173e-06,
+          "turns": 270,
+          "pole_area_m2": 0.115,
+          "gap_m": 0.01,
+          "gap_min_m": 0.001,
+          "gap_max_m": 0.025,
+          "gap_floor_m": 1e-06,
+          "current_min_a": 0.0,
+          "current_max_a": 60.0
+        },
+        "controller": {
+          "kp_a_m": 5500.0,
+          "kd_as_m": 50.0,
+          "current_gain_v_a": 65.0
+        },
+        "time": {
+          "dt": 0.001,
+          "n_steps": 10001
+        },
+        "integrator": {
+          "method": "Radau",
+          "rtol": 1e-08,
+          "scaled_atol": 1e-11,
+          "max_step": 0.00025
+        },
+        "initial": {
+          "offsets": {},
+          "random_std": {
+            "z_m1": 1e-05,
+            "z_m2": 1e-05,
+            "z_c": 1e-05,
+            "q1": 1e-05,
+            "q2": 1e-05
+          }
+        },
+        "excitation": {
+          "type": "none",
+          "amplitudes_n": [
+            0.0,
+            0.0
+          ],
+          "start_s": 2.0,
+          "duration_s": 0.1
+        },
+        "dataset": {
+          "name": "stationary_two_point",
+          "n_samples": 4,
+          "seed": 20261016,
+          "dtype": "float64",
+          "plot": true,
+          "split_fractions": [
+            0.7,
+            0.15,
+            0.15
+          ],
+          "split_seed": 20261016,
+          "split_by": "trajectory",
+          "parameter_ranges": {},
+          "n_parameter_families": 4
+        },
+        "validation": {
+          "model": true,
+          "solver": true,
+          "dataset": true,
+          "scientific": true,
+          "duration_s": 10.0,
+          "fit_start_s": 2.0,
+          "fit_end_s": 9.5,
+          "gains_v_a": [
+            65.0,
+            80.0
+          ],
+          "seed": 20261016
+        }
+      },
+      "refined_fit": {
+        "linear_eigenvalue": [
+          0.2258298458337228,
+          62.71627451278433
+        ],
+        "linear_frequency_hz": 9.981605101017877,
+        "projected_alpha_per_s": 0.2258750879137711,
+        "projected_frequency_hz": 9.981534234616834,
+        "alpha_absolute_error_per_s": 4.5242080048302213e-05,
+        "frequency_absolute_error_hz": 7.086640104247977e-05,
+        "ordinary_signal_fit": {
+          "signal": "q1_absolute_peaks",
+          "n_peaks": 150,
+          "alpha_per_s": 0.22588140885301752,
+          "frequency_hz": 9.981243301178992
+        },
+        "projection_eigenvector_condition": 11.91878481145402,
+        "fit_start_s": 2.0,
+        "fit_end_s": 9.5,
+        "fit_n_samples": 7501
+      },
+      "gap_max_difference_m": 1.0639579495208551e-13,
+      "displacement_max_difference_m": 6.596394437619058e-14,
+      "alpha_absolute_difference_per_s": 1.9148058139073498e-10,
+      "frequency_absolute_difference_hz": 1.9131363160340698e-12
+    },
+    {
+      "gain_v_a": 80.0,
+      "base_max_step_s": 0.0005,
+      "refined_config": {
+        "meta": {
+          "model_version": "stationary_two_point_v2",
+          "parameter_source": "Wang_mechanics_Li_control_attachment_parameters",
+          "notes": "三自由度机械与 Li 电流回路的组合算例。m3 采用附件 330 kg；王珊表1为450 kg。",
+          "sources": {
+            "mechanics": "Wang et al. 2026, DOI:10.16385/j.cnki.issn.1004-4523.202508057, Eq.(3)",
+            "circuit_and_beam": "Li et al. 2015, DOI:10.1155/2015/709583, Eqs.(6)-(19)",
+            "parameters": "docs/references/two_point_original_matlab.txt；MATLAB R2024a与独立SciPy基线已核对，m3采用330 kg",
+            "beam": "original repository 11098d1: L=24 m, mu=400 kg/m, EI=1.68e9 N m^2",
+            "positions": "本项目计算选择；点1为后点、点2为前点"
+          }
+        },
+        "geometry": {
+          "positions_m": [
+            9.6,
+            14.4
+          ]
+        },
+        "vehicle": {
+          "m1_kg": 300.0,
+          "m2_kg": 300.0,
+          "m3_kg": 330.0,
+          "m4_kg": 2437.5,
+          "stiffness_n_m": [
+            20000000.0,
+            20000000.0
+          ],
+          "damping_ns_m": [
+            5000.0,
+            5000.0
+          ],
+          "gravity": 9.81
+        },
+        "beam": {
+          "enabled": true,
+          "n_modes": 2,
+          "length_m": 24.0,
+          "mass_per_length": 400.0,
+          "f1_hz": 5.588844660540809,
+          "damping_ratio": 0.02
+        },
+        "magnet": {
+          "mu0": 1.2566370614359173e-06,
+          "turns": 270,
+          "pole_area_m2": 0.115,
+          "gap_m": 0.01,
+          "gap_min_m": 0.001,
+          "gap_max_m": 0.025,
+          "gap_floor_m": 1e-06,
+          "current_min_a": 0.0,
+          "current_max_a": 60.0
+        },
+        "controller": {
+          "kp_a_m": 5500.0,
+          "kd_as_m": 50.0,
+          "current_gain_v_a": 80.0
+        },
+        "time": {
+          "dt": 0.001,
+          "n_steps": 10001
+        },
+        "integrator": {
+          "method": "Radau",
+          "rtol": 1e-08,
+          "scaled_atol": 1e-11,
+          "max_step": 0.00025
+        },
+        "initial": {
+          "offsets": {},
+          "random_std": {
+            "z_m1": 1e-05,
+            "z_m2": 1e-05,
+            "z_c": 1e-05,
+            "q1": 1e-05,
+            "q2": 1e-05
+          }
+        },
+        "excitation": {
+          "type": "none",
+          "amplitudes_n": [
+            0.0,
+            0.0
+          ],
+          "start_s": 2.0,
+          "duration_s": 0.1
+        },
+        "dataset": {
+          "name": "stationary_two_point",
+          "n_samples": 4,
+          "seed": 20261016,
+          "dtype": "float64",
+          "plot": true,
+          "split_fractions": [
+            0.7,
+            0.15,
+            0.15
+          ],
+          "split_seed": 20261016,
+          "split_by": "trajectory",
+          "parameter_ranges": {},
+          "n_parameter_families": 4
+        },
+        "validation": {
+          "model": true,
+          "solver": true,
+          "dataset": true,
+          "scientific": true,
+          "duration_s": 10.0,
+          "fit_start_s": 2.0,
+          "fit_end_s": 9.5,
+          "gains_v_a": [
+            65.0,
+            80.0
+          ],
+          "seed": 20261016
+        }
+      },
+      "refined_fit": {
+        "linear_eigenvalue": [
+          -1.61463684644578,
+          63.49288869759311
+        ],
+        "linear_frequency_hz": 10.105207087405477,
+        "projected_alpha_per_s": -1.6146368231367363,
+        "projected_frequency_hz": 10.10520709207367,
+        "alpha_absolute_error_per_s": 2.3309043806207796e-08,
+        "frequency_absolute_error_hz": 4.668192943313443e-09,
+        "ordinary_signal_fit": {
+          "signal": "q1_absolute_peaks",
+          "n_peaks": 151,
+          "alpha_per_s": -1.6146607237988715,
+          "frequency_hz": 10.106454655706779
+        },
+        "projection_eigenvector_condition": 12.808008560120136,
+        "fit_start_s": 2.0,
+        "fit_end_s": 9.5,
+        "fit_n_samples": 7501
+      },
+      "gap_max_difference_m": 2.936192955438344e-14,
+      "displacement_max_difference_m": 3.042953157516865e-14,
+      "alpha_absolute_difference_per_s": 1.401603633155446e-08,
+      "frequency_absolute_difference_hz": 2.4113173680007094e-09
+    }
+  ],
+  "symmetry_channels": [
+    {
+      "channel": "symmetric",
+      "config": {
+        "meta": {
+          "model_version": "stationary_two_point_v2",
+          "parameter_source": "Wang_mechanics_Li_control_attachment_parameters",
+          "notes": "三自由度机械与 Li 电流回路的组合算例。m3 采用附件 330 kg；王珊表1为450 kg。",
+          "sources": {
+            "mechanics": "Wang et al. 2026, DOI:10.16385/j.cnki.issn.1004-4523.202508057, Eq.(3)",
+            "circuit_and_beam": "Li et al. 2015, DOI:10.1155/2015/709583, Eqs.(6)-(19)",
+            "parameters": "docs/references/two_point_original_matlab.txt；MATLAB R2024a与独立SciPy基线已核对，m3采用330 kg",
+            "beam": "original repository 11098d1: L=24 m, mu=400 kg/m, EI=1.68e9 N m^2",
+            "positions": "本项目计算选择；点1为后点、点2为前点"
+          }
+        },
+        "geometry": {
+          "positions_m": [
+            9.6,
+            14.4
+          ]
+        },
+        "vehicle": {
+          "m1_kg": 300.0,
+          "m2_kg": 300.0,
+          "m3_kg": 330.0,
+          "m4_kg": 2437.5,
+          "stiffness_n_m": [
+            20000000.0,
+            20000000.0
+          ],
+          "damping_ns_m": [
+            5000.0,
+            5000.0
+          ],
+          "gravity": 9.81
+        },
+        "beam": {
+          "enabled": true,
+          "n_modes": 2,
+          "length_m": 24.0,
+          "mass_per_length": 400.0,
+          "f1_hz": 5.588844660540809,
+          "damping_ratio": 0.02
+        },
+        "magnet": {
+          "mu0": 1.2566370614359173e-06,
+          "turns": 270,
+          "pole_area_m2": 0.115,
+          "gap_m": 0.01,
+          "gap_min_m": 0.001,
+          "gap_max_m": 0.025,
+          "gap_floor_m": 1e-06,
+          "current_min_a": 0.0,
+          "current_max_a": 60.0
+        },
+        "controller": {
+          "kp_a_m": 5500.0,
+          "kd_as_m": 50.0,
+          "current_gain_v_a": 65.0
+        },
+        "time": {
+          "dt": 0.001,
+          "n_steps": 1001
+        },
+        "integrator": {
+          "method": "Radau",
+          "rtol": 1e-08,
+          "scaled_atol": 1e-11,
+          "max_step": 0.0005
+        },
+        "initial": {
+          "offsets": {},
+          "random_std": {
+            "z_m1": 1e-05,
+            "z_m2": 1e-05,
+            "z_c": 1e-05,
+            "q1": 1e-05,
+            "q2": 1e-05
+          }
+        },
+        "excitation": {
+          "type": "none",
+          "amplitudes_n": [
+            0.0,
+            0.0
+          ],
+          "start_s": 2.0,
+          "duration_s": 0.1
+        },
+        "dataset": {
+          "name": "stationary_two_point",
+          "n_samples": 4,
+          "seed": 20261016,
+          "dtype": "float64",
+          "plot": true,
+          "split_fractions": [
+            0.7,
+            0.15,
+            0.15
+          ],
+          "split_seed": 20261016,
+          "split_by": "trajectory",
+          "parameter_ranges": {},
+          "n_parameter_families": 4
+        },
+        "validation": {
+          "model": true,
+          "solver": true,
+          "dataset": true,
+          "scientific": true,
+          "duration_s": 10.0,
+          "fit_start_s": 2.0,
+          "fit_end_s": 9.5,
+          "gains_v_a": [
+            65.0,
+            80.0
+          ],
+          "seed": 20261016
+        }
+      },
+      "initial_state": [
+        1e-05,
+        1e-05,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        25.042961588229478,
+        25.042961588229478
+      ],
+      "modal_peak_displacement_m": [
+        6.2783429838754054e-06,
+        1.6940921042942382e-19
+      ],
+      "gap_min_m": 0.00998941358557088,
+      "gap_max_m": 0.010011704026842205
+    },
+    {
+      "channel": "antisymmetric",
+      "config": {
+        "meta": {
+          "model_version": "stationary_two_point_v2",
+          "parameter_source": "Wang_mechanics_Li_control_attachment_parameters",
+          "notes": "三自由度机械与 Li 电流回路的组合算例。m3 采用附件 330 kg；王珊表1为450 kg。",
+          "sources": {
+            "mechanics": "Wang et al. 2026, DOI:10.16385/j.cnki.issn.1004-4523.202508057, Eq.(3)",
+            "circuit_and_beam": "Li et al. 2015, DOI:10.1155/2015/709583, Eqs.(6)-(19)",
+            "parameters": "docs/references/two_point_original_matlab.txt；MATLAB R2024a与独立SciPy基线已核对，m3采用330 kg",
+            "beam": "original repository 11098d1: L=24 m, mu=400 kg/m, EI=1.68e9 N m^2",
+            "positions": "本项目计算选择；点1为后点、点2为前点"
+          }
+        },
+        "geometry": {
+          "positions_m": [
+            9.6,
+            14.4
+          ]
+        },
+        "vehicle": {
+          "m1_kg": 300.0,
+          "m2_kg": 300.0,
+          "m3_kg": 330.0,
+          "m4_kg": 2437.5,
+          "stiffness_n_m": [
+            20000000.0,
+            20000000.0
+          ],
+          "damping_ns_m": [
+            5000.0,
+            5000.0
+          ],
+          "gravity": 9.81
+        },
+        "beam": {
+          "enabled": true,
+          "n_modes": 2,
+          "length_m": 24.0,
+          "mass_per_length": 400.0,
+          "f1_hz": 5.588844660540809,
+          "damping_ratio": 0.02
+        },
+        "magnet": {
+          "mu0": 1.2566370614359173e-06,
+          "turns": 270,
+          "pole_area_m2": 0.115,
+          "gap_m": 0.01,
+          "gap_min_m": 0.001,
+          "gap_max_m": 0.025,
+          "gap_floor_m": 1e-06,
+          "current_min_a": 0.0,
+          "current_max_a": 60.0
+        },
+        "controller": {
+          "kp_a_m": 5500.0,
+          "kd_as_m": 50.0,
+          "current_gain_v_a": 65.0
+        },
+        "time": {
+          "dt": 0.001,
+          "n_steps": 1001
+        },
+        "integrator": {
+          "method": "Radau",
+          "rtol": 1e-08,
+          "scaled_atol": 1e-11,
+          "max_step": 0.0005
+        },
+        "initial": {
+          "offsets": {},
+          "random_std": {
+            "z_m1": 1e-05,
+            "z_m2": 1e-05,
+            "z_c": 1e-05,
+            "q1": 1e-05,
+            "q2": 1e-05
+          }
+        },
+        "excitation": {
+          "type": "none",
+          "amplitudes_n": [
+            0.0,
+            0.0
+          ],
+          "start_s": 2.0,
+          "duration_s": 0.1
+        },
+        "dataset": {
+          "name": "stationary_two_point",
+          "n_samples": 4,
+          "seed": 20261016,
+          "dtype": "float64",
+          "plot": true,
+          "split_fractions": [
+            0.7,
+            0.15,
+            0.15
+          ],
+          "split_seed": 20261016,
+          "split_by": "trajectory",
+          "parameter_ranges": {},
+          "n_parameter_families": 4
+        },
+        "validation": {
+          "model": true,
+          "solver": true,
+          "dataset": true,
+          "scientific": true,
+          "duration_s": 10.0,
+          "fit_start_s": 2.0,
+          "fit_end_s": 9.5,
+          "gains_v_a": [
+            65.0,
+            80.0
+          ],
+          "seed": 20261016
+        }
+      },
+      "initial_state": [
+        1e-05,
+        -1e-05,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        25.042961588229478,
+        25.042961588229478
+      ],
+      "modal_peak_displacement_m": [
+        7.732587056393964e-09,
+        1.0832295163328537e-06
+      ],
+      "gap_min_m": 0.00999,
+      "gap_max_m": 0.01001
+    }
+  ],
+  "rigid_nonlinear_cases": [
+    {
+      "gain_v_a": 65.0,
+      "config": {
+        "meta": {
+          "model_version": "stationary_two_point_v2",
+          "parameter_source": "Wang_mechanics_Li_control_attachment_parameters",
+          "notes": "三自由度机械与 Li 电流回路的组合算例。m3 采用附件 330 kg；王珊表1为450 kg。",
+          "sources": {
+            "mechanics": "Wang et al. 2026, DOI:10.16385/j.cnki.issn.1004-4523.202508057, Eq.(3)",
+            "circuit_and_beam": "Li et al. 2015, DOI:10.1155/2015/709583, Eqs.(6)-(19)",
+            "parameters": "docs/references/two_point_original_matlab.txt；MATLAB R2024a与独立SciPy基线已核对，m3采用330 kg",
+            "beam": "original repository 11098d1: L=24 m, mu=400 kg/m, EI=1.68e9 N m^2",
+            "positions": "本项目计算选择；点1为后点、点2为前点"
+          }
+        },
+        "geometry": {
+          "positions_m": [
+            9.6,
+            14.4
+          ]
+        },
+        "vehicle": {
+          "m1_kg": 300.0,
+          "m2_kg": 300.0,
+          "m3_kg": 330.0,
+          "m4_kg": 2437.5,
+          "stiffness_n_m": [
+            20000000.0,
+            20000000.0
+          ],
+          "damping_ns_m": [
+            5000.0,
+            5000.0
+          ],
+          "gravity": 9.81
+        },
+        "beam": {
+          "enabled": false,
+          "n_modes": 2,
+          "length_m": 24.0,
+          "mass_per_length": 400.0,
+          "f1_hz": 5.588844660540809,
+          "damping_ratio": 0.02
+        },
+        "magnet": {
+          "mu0": 1.2566370614359173e-06,
+          "turns": 270,
+          "pole_area_m2": 0.115,
+          "gap_m": 0.01,
+          "gap_min_m": 0.001,
+          "gap_max_m": 0.025,
+          "gap_floor_m": 1e-06,
+          "current_min_a": 0.0,
+          "current_max_a": 60.0
+        },
+        "controller": {
+          "kp_a_m": 5500.0,
+          "kd_as_m": 50.0,
+          "current_gain_v_a": 65.0
+        },
+        "time": {
+          "dt": 0.001,
+          "n_steps": 10001
+        },
+        "integrator": {
+          "method": "Radau",
+          "rtol": 1e-08,
+          "scaled_atol": 1e-11,
+          "max_step": 0.0005
+        },
+        "initial": {
+          "offsets": {},
+          "random_std": {
+            "z_m1": 1e-05,
+            "z_m2": 1e-05,
+            "z_c": 1e-05
+          }
+        },
+        "excitation": {
+          "type": "none",
+          "amplitudes_n": [
+            0.0,
+            0.0
+          ],
+          "start_s": 2.0,
+          "duration_s": 0.1
+        },
+        "dataset": {
+          "name": "stationary_two_point",
+          "n_samples": 4,
+          "seed": 20261016,
+          "dtype": "float64",
+          "plot": true,
+          "split_fractions": [
+            0.7,
+            0.15,
+            0.15
+          ],
+          "split_seed": 20261016,
+          "split_by": "trajectory",
+          "parameter_ranges": {},
+          "n_parameter_families": 4
+        },
+        "validation": {
+          "model": true,
+          "solver": true,
+          "dataset": true,
+          "scientific": true,
+          "duration_s": 10.0,
+          "fit_start_s": 2.0,
+          "fit_end_s": 9.5,
+          "gains_v_a": [
+            65.0,
+            80.0
+          ],
+          "seed": 20261016
+        }
+      },
+      "initial_state": [
+        -1.3753949938835243e-05,
+        1.0366591657609076e-05,
+        2.8826042099494687e-08,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        25.042961588229478,
+        25.042961588229478
+      ],
+      "newton_matrix": "SciPy default numerical Jacobian",
+      "active_state_names": [
+        "z_m1",
+        "z_m2",
+        "z_c",
+        "v_m1",
+        "v_m2",
+        "v_c",
+        "i1",
+        "i2"
+      ],
+      "rigid_eigenvalues": [
+        [
+          -106.74308586374103,
+          0.0
+        ],
+        [
+          -95.53787364310756,
+          0.0
+        ],
+        [
+          -16.74967104734301,
+          -320.9382708602268
+        ],
+        [
+          -16.74967104734301,
+          320.9382708602268
+        ],
+        [
+          -16.660790228344197,
+          -303.34591606499004
+        ],
+        [
+          -16.660790228344197,
+          303.34591606499004
+        ],
+        [
+          -7.320410024831919,
+          -48.242671227074915
+        ],
+        [
+          -7.320410024831919,
+          48.242671227074915
+        ]
+      ],
+      "rigid_spectral_abscissa_per_s": -7.320410024832022,
+      "projected_fit_interval_s": [
+        0.1,
+        1.0
+      ],
+      "projected_alpha_per_s": -7.320409264232481,
+      "projected_frequency_hz": 7.678060185568903,
+      "scaled_initial_norm": 0.0017223187639235054,
+      "scaled_final_norm": 3.956094480979986e-15,
+      "scaled_final_second_peak_norm": 4.55090999239489e-15,
+      "late_to_initial_norm_ratio": 2.642315747653907e-12,
+      "beam_state_max_absolute": 0.0,
+      "n_valid": 10001,
+      "termination_reason": "completed"
+    },
+    {
+      "gain_v_a": 80.0,
+      "config": {
+        "meta": {
+          "model_version": "stationary_two_point_v2",
+          "parameter_source": "Wang_mechanics_Li_control_attachment_parameters",
+          "notes": "三自由度机械与 Li 电流回路的组合算例。m3 采用附件 330 kg；王珊表1为450 kg。",
+          "sources": {
+            "mechanics": "Wang et al. 2026, DOI:10.16385/j.cnki.issn.1004-4523.202508057, Eq.(3)",
+            "circuit_and_beam": "Li et al. 2015, DOI:10.1155/2015/709583, Eqs.(6)-(19)",
+            "parameters": "docs/references/two_point_original_matlab.txt；MATLAB R2024a与独立SciPy基线已核对，m3采用330 kg",
+            "beam": "original repository 11098d1: L=24 m, mu=400 kg/m, EI=1.68e9 N m^2",
+            "positions": "本项目计算选择；点1为后点、点2为前点"
+          }
+        },
+        "geometry": {
+          "positions_m": [
+            9.6,
+            14.4
+          ]
+        },
+        "vehicle": {
+          "m1_kg": 300.0,
+          "m2_kg": 300.0,
+          "m3_kg": 330.0,
+          "m4_kg": 2437.5,
+          "stiffness_n_m": [
+            20000000.0,
+            20000000.0
+          ],
+          "damping_ns_m": [
+            5000.0,
+            5000.0
+          ],
+          "gravity": 9.81
+        },
+        "beam": {
+          "enabled": false,
+          "n_modes": 2,
+          "length_m": 24.0,
+          "mass_per_length": 400.0,
+          "f1_hz": 5.588844660540809,
+          "damping_ratio": 0.02
+        },
+        "magnet": {
+          "mu0": 1.2566370614359173e-06,
+          "turns": 270,
+          "pole_area_m2": 0.115,
+          "gap_m": 0.01,
+          "gap_min_m": 0.001,
+          "gap_max_m": 0.025,
+          "gap_floor_m": 1e-06,
+          "current_min_a": 0.0,
+          "current_max_a": 60.0
+        },
+        "controller": {
+          "kp_a_m": 5500.0,
+          "kd_as_m": 50.0,
+          "current_gain_v_a": 80.0
+        },
+        "time": {
+          "dt": 0.001,
+          "n_steps": 10001
+        },
+        "integrator": {
+          "method": "Radau",
+          "rtol": 1e-08,
+          "scaled_atol": 1e-11,
+          "max_step": 0.0005
+        },
+        "initial": {
+          "offsets": {},
+          "random_std": {
+            "z_m1": 1e-05,
+            "z_m2": 1e-05,
+            "z_c": 1e-05
+          }
+        },
+        "excitation": {
+          "type": "none",
+          "amplitudes_n": [
+            0.0,
+            0.0
+          ],
+          "start_s": 2.0,
+          "duration_s": 0.1
+        },
+        "dataset": {
+          "name": "stationary_two_point",
+          "n_samples": 4,
+          "seed": 20261016,
+          "dtype": "float64",
+          "plot": true,
+          "split_fractions": [
+            0.7,
+            0.15,
+            0.15
+          ],
+          "split_seed": 20261016,
+          "split_by": "trajectory",
+          "parameter_ranges": {},
+          "n_parameter_families": 4
+        },
+        "validation": {
+          "model": true,
+          "solver": true,
+          "dataset": true,
+          "scientific": true,
+          "duration_s": 10.0,
+          "fit_start_s": 2.0,
+          "fit_end_s": 9.5,
+          "gains_v_a": [
+            65.0,
+            80.0
+          ],
+          "seed": 20261016
+        }
+      },
+      "initial_state": [
+        -1.3753949938835243e-05,
+        1.0366591657609076e-05,
+        2.8826042099494687e-08,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        25.042961588229478,
+        25.042961588229478
+      ],
+      "newton_matrix": "SciPy default numerical Jacobian",
+      "active_state_names": [
+        "z_m1",
+        "z_m2",
+        "z_c",
+        "v_m1",
+        "v_m2",
+        "v_c",
+        "i1",
+        "i2"
+      ],
+      "rigid_eigenvalues": [
+        [
+          -124.83500229759211,
+          0.0
+        ],
+        [
+          -111.64005760276356,
+          0.0
+        ],
+        [
+          -21.85306274069898,
+          -310.89373186048624
+        ],
+        [
+          -21.85306274069898,
+          310.89373186048624
+        ],
+        [
+          -21.126285297723328,
+          -327.43121989661597
+        ],
+        [
+          -21.126285297723328,
+          327.43121989661597
+        ],
+        [
+          -9.130934523903868,
+          -48.191653296280144
+        ],
+        [
+          -9.130934523903868,
+          48.191653296280144
+        ]
+      ],
+      "rigid_spectral_abscissa_per_s": -9.130934523903838,
+      "projected_fit_interval_s": [
+        0.1,
+        1.0
+      ],
+      "projected_alpha_per_s": -9.130930725994787,
+      "projected_frequency_hz": 7.669939981447,
+      "scaled_initial_norm": 0.0017223187639235054,
+      "scaled_final_norm": 1.85342256590495e-15,
+      "scaled_final_second_peak_norm": 4.052477362518544e-15,
+      "late_to_initial_norm_ratio": 2.3529194754209446e-12,
+      "beam_state_max_absolute": 0.0,
+      "n_valid": 10001,
+      "termination_reason": "completed"
+    }
+  ],
+  "modal_truncation_convergence_claimed": false,
+  "module_validation": {
+    "model": {
+      "passed": true,
+      "model_version": "stationary_two_point_v2",
+      "n_modes": 2,
+      "n_state": 12,
+      "equilibrium_scaled_max": 0.0,
+      "equilibrium_rhs_si": [
+        0.0,
+        0.0,
+        0.0,
+        -0.0,
+        -0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "force_star_n": [
+        16517.5875,
+        16517.5875
+      ],
+      "i0_a": [
+        25.042961588229478,
+        25.042961588229478
+      ],
+      "q_star_m": [
+        0.005308085207370935,
+        3.8414495195202305e-20
+      ],
+      "w_star_m": [
+        0.005048289025520039,
+        0.00504828902552004
+      ],
+      "beam_ei_n_m2": 1679999999.6534846,
+      "same_order_static_w_m": [
+        0.005048289025520039,
+        0.00504828902552004
+      ],
+      "same_order_static_max_error_m": 0.0,
+      "full_beam_static_w_m": [
+        0.005074202881046601,
+        0.005074202881046601
+      ],
+      "static_truncation_error_m": [
+        -2.5913855526561724e-05,
+        -2.5913855526560857e-05
+      ],
+      "free_modal_max_errors_m": [
+        8.575759663487746e-16,
+        3.726202289430769e-14
+      ],
+      "jacobian_scaled_relative_residual": 1.8272440829308517e-11,
+      "port_power_relative_residual": 1.7218688829341745e-16,
+      "beam_energy_relative_residual": 2.0040931375643123e-15,
+      "mechanical_energy_relative_residual": 6.316795154106659e-15,
+      "initial_mapping_order_independent": true,
+      "inactive_random_modal_coordinates": []
+    },
+    "solver": {
+      "passed": true,
+      "events": [
+        {
+          "reason": "gap1_min",
+          "time_s": 0.0032499999999999994,
+          "time_error_s": 8.673617379884035e-19,
+          "state_max_error": 1.734723475976807e-18
+        },
+        {
+          "reason": "gap1_max",
+          "time_s": 0.0032500000000000007,
+          "time_error_s": 4.336808689942018e-19,
+          "state_max_error": 0.0
+        },
+        {
+          "reason": "gap2_min",
+          "time_s": 0.0032499999999999994,
+          "time_error_s": 8.673617379884035e-19,
+          "state_max_error": 1.734723475976807e-18
+        },
+        {
+          "reason": "gap2_max",
+          "time_s": 0.0032500000000000007,
+          "time_error_s": 4.336808689942018e-19,
+          "state_max_error": 0.0
+        },
+        {
+          "reason": "current1_min",
+          "time_s": 0.003250000000000001,
+          "time_error_s": 8.673617379884035e-19,
+          "state_max_error": 3.552713678800501e-15
+        },
+        {
+          "reason": "current1_max",
+          "time_s": 0.0032500000000000016,
+          "time_error_s": 1.3010426069826053e-18,
+          "state_max_error": 0.0
+        },
+        {
+          "reason": "current2_min",
+          "time_s": 0.003250000000000001,
+          "time_error_s": 8.673617379884035e-19,
+          "state_max_error": 3.552713678800501e-15
+        },
+        {
+          "reason": "current2_max",
+          "time_s": 0.0032500000000000016,
+          "time_error_s": 1.3010426069826053e-18,
+          "state_max_error": 0.0
+        }
+      ],
+      "outside_initial_all_invalid": true,
+      "boundary_initial_valid": true,
+      "failure_retained_time_s": 0.0046110000000000005,
+      "narrow_pulse_duration_s": 1e-05,
+      "narrow_pulse_area_error_n_s": 3.5199301156099705e-16,
+      "equilibrium_scaled_max_error": 0.0,
+      "repeat_exact": true
+    },
+    "dataset": {
+      "allow_pickle": false,
+      "continuous_numeric_spelling": true,
+      "family_split_checked": true,
+      "malformed_datasets_rejected": 98,
+      "nonfinite_initial_diagnostics": true,
+      "passed": true,
+      "physical_boundary_roundtrips": 16,
+      "repeat_exact": true,
+      "retained_failed_attempts": 4,
+      "sample_shape": [
+        4,
+        31,
+        5
+      ]
+    }
+  },
+  "provenance": {
+    "physics_sha256": {
+      "sim/model.py": "89057738a1fe6be48fb6bda8957ab995f538fc71e36252f87612cfd19e107415",
+      "sim/solver.py": "dfbdcb0cb979be84c75171dddfd223a9bef138ff824a91b3e8d8e4ca40db1d5f"
+    },
+    "python_version": "3.11.7",
+    "numpy_version": "1.26.4",
+    "scipy_version": "1.13.1",
+    "generator": {
+      "source_sha256": "0aa4a3a5843d8249f45a03895153ebea4b8f346ff063f1e42d7783aaaee558ce",
+      "git_commit": "1a19d757d77a7b0ba9f941682ec0a4e034170d9d",
+      "git_dirty": false
+    }
+  },
+  "original_reference": {
+    "source": "user supplied 两点模型.txt",
+    "source_sha256": "986d25c1c46d6f3d0cacfb2f9aaafa30a72cc0fa3b08a22aa61a6a7c9d05bfb4",
+    "matlab_version": "24.1.0.2537033 (R2024a)",
+    "numpy_version": "1.26.4",
+    "scipy_version": "1.13.1",
+    "matlab_solver": "ode15s, rtol=1e-6, atol=1e-9, max_step=0.0005 s; original adaptive output; state pchip resampling; observations reevaluated from interpolated states",
+    "scipy_solver": "Radau, rtol=1e-9, atol=1e-12, max_step=0.0005 s; dense output evaluated on common 0.5 ms grid",
+    "original_current_a": 25.0,
+    "current_limits_a": [
+      0.0,
+      100.0
+    ],
+    "gap_floor_m": 0.0001,
+    "original_initial_state": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "initial_acceleration_m_s2": 0.18874580964577034,
+    "force_at_original_current_n": 16460.96375710627,
+    "support_force_n": 16517.5875,
+    "corrected_equilibrium_current_a": 25.042961588229478,
+    "track_amplitude_m": 0.003,
+    "track_frequency_hz": 7.0,
+    "track_window_s": [
+      2.0,
+      4.0
+    ],
+    "observation_names": [
+      "gap1",
+      "gap2",
+      "a_m1",
+      "a_m2",
+      "current1",
+      "current2"
+    ],
+    "observation_units": [
+      "m",
+      "m",
+      "m/s^2",
+      "m/s^2",
+      "A",
+      "A"
+    ],
+    "time_samples": 10001,
+    "matlab_raw_samples": 119022,
+    "matlab_min_max": [
+      [
+        0.007217178737342893,
+        0.012408940139403623
+      ],
+      [
+        0.007217178737340511,
+        0.012408940139403095
+      ],
+      [
+        -96.81197718722788,
+        54.47396286463448
+      ],
+      [
+        -96.81197718721396,
+        54.47396286466795
+      ],
+      [
+        0.7008723178541167,
+        41.58996739135264
+      ],
+      [
+        0.7008723176590124,
+        41.58996739125164
+      ]
+    ],
+    "scipy_min_max": [
+      [
+        0.007217177462977684,
+        0.0124089407921078
+      ],
+      [
+        0.007217177462977684,
+        0.0124089407921078
+      ],
+      [
+        -96.81313240306567,
+        54.47396803337468
+      ],
+      [
+        -96.81313240306567,
+        54.473967899172585
+      ],
+      [
+        0.7008392145643079,
+        41.58965031876289
+      ],
+      [
+        0.7008391721353711,
+        41.589650318762764
+      ]
+    ],
+    "absolute_max_difference": [
+      9.006065983252487e-09,
+      9.006065710900901e-09,
+      0.013291375754342027,
+      0.013291375812769957,
+      0.002854436450114406,
+      0.0028544364143954226
+    ],
+    "rms_difference": [
+      5.364617096953139e-10,
+      5.364608454335292e-10,
+      0.0005707302410019936,
+      0.000570730317643922,
+      0.0001812872563143876,
+      0.00018128725445712508
+    ],
+    "max_left_right_difference": [
+      1.861358289723114e-14,
+      1.3567250434221023e-08,
+      3.5578366919253313e-09
+    ],
+    "finite": true,
+    "matlab_raw_min_max": [
+      [
+        0.007217142597551566,
+        0.012408976536480125
+      ],
+      [
+        0.0072171425975525805,
+        0.01240897653647974
+      ],
+      [
+        -97.93707568654371,
+        54.47513370949449
+      ],
+      [
+        -97.93707568656271,
+        54.475133709519795
+      ],
+      [
+        0.0,
+        41.64626860670735
+      ],
+      [
+        0.0,
+        41.646268606706116
+      ]
+    ],
+    "current_saturation_hit_raw": true,
+    "current_saturation_hit_uniform": false,
+    "raw_saturation_samples_per_current": [
+      16,
+      16
+    ],
+    "raw_lower_saturation_observed_time_span_s": [
+      2.000534554007079,
+      2.000910130152063
+    ],
+    "gap_floor_hit": false
+  },
+  "independent_model_probes": {
+    "passed": true,
+    "cases": [
+      {
+        "label": "one_mode",
+        "n_state": 10,
+        "rhs_max_relative_difference": 1.2156942119645464e-14,
+        "reaction_balance_max_residual_n": 7.275957614183426e-12,
+        "electrical_energy_max_relative_residual": 1.9334229907090017e-16,
+        "mechanical_energy_max_absolute_residual_w": 3.3688329903469594e-15,
+        "jacobian_scaled_relative_residual": 3.2218704291153696e-11,
+        "equilibrium_max_scaled_rhs": 0.0,
+        "i0_a": [
+          25.042961588229478,
+          25.042961588229478
+        ],
+        "q_star_m": [
+          0.005308085207370935
+        ],
+        "w_star_m": [
+          0.005048289025520039,
+          0.00504828902552004
+        ]
+      },
+      {
+        "label": "two_mode",
+        "n_state": 12,
+        "rhs_max_relative_difference": 1.2212453270876722e-14,
+        "reaction_balance_max_residual_n": 3.637978807091713e-12,
+        "electrical_energy_max_relative_residual": 2.0072195650495854e-16,
+        "mechanical_energy_max_absolute_residual_w": 4.121702978920894e-15,
+        "jacobian_scaled_relative_residual": 3.2218704291153696e-11,
+        "equilibrium_max_scaled_rhs": 0.0,
+        "i0_a": [
+          25.042961588229478,
+          25.042961588229478
+        ],
+        "q_star_m": [
+          0.005308085207370935,
+          3.8414495195202305e-20
+        ],
+        "w_star_m": [
+          0.005048289025520039,
+          0.00504828902552004
+        ]
+      },
+      {
+        "label": "asymmetric",
+        "n_state": 12,
+        "rhs_max_relative_difference": 1.942890293094024e-14,
+        "reaction_balance_max_residual_n": 7.275957614183426e-12,
+        "electrical_energy_max_relative_residual": 3.3524402063721247e-16,
+        "mechanical_energy_max_absolute_residual_w": 7.840950111415168e-15,
+        "jacobian_scaled_relative_residual": 3.549192721645037e-11,
+        "equilibrium_max_scaled_rhs": 2.078845032623836e-14,
+        "i0_a": [
+          24.893784019147784,
+          25.412074510032344
+        ],
+        "q_star_m": [
+          0.004966326133964354,
+          -3.469182827427116e-06
+        ],
+        "w_star_m": [
+          0.004361582892056029,
+          0.004397996276589277
+        ]
+      }
+    ],
+    "reviewed_sha256": {
+      "sim\\model.py": "89057738a1fe6be48fb6bda8957ab995f538fc71e36252f87612cfd19e107415",
+      "sim\\solver.py": "dfbdcb0cb979be84c75171dddfd223a9bef138ff824a91b3e8d8e4ca40db1d5f",
+      "docs\\dynamic_model.md": "573ce722948b4b228d04ec95ebbaf8c50a8448aea971122fdff244ea324385d2",
+      "configs\\default.yaml": "5e3fc6db39d8a51f8adb5422b35eb9da194efb753303d730e390c759e635e41d"
+    }
+  },
+  "reviews": {
+    "independent_model_review_passed": true,
+    "independent_editorial_review_passed": true,
+    "code_review_important_findings_resolved": 2,
+    "positive_time_nonfinite_terminal_state_rejected": true
+  }
+}
