@@ -1,0 +1,93 @@
+clear; clc; close all;
+
+%% 机械参数
+p.m1=300; p.m2=300; p.m3=330; p.m4=2437.5;
+p.c=5000; p.k=2e7;
+
+%% 非线性电磁力参数
+p.mu0=4*pi*1e-7; p.N=270; p.Area=0.115;
+p.i0=25; p.delta0=0.01; p.g=9.81;
+
+%% 控制参数
+p.Ka=0.5; p.Kv=75; p.Kp=7000;
+p.T1a=7.95774e-4; p.TH=0.008; p.T2=7.95774e-5;
+
+% 观测器参数：直接采用固有频率和阻尼比
+p.omega0=400*pi;       % rad/s
+p.zeta=0.707;           % 无量纲阻尼比
+
+%% 电流和间隙保护
+p.Imin=0; p.Imax=100; p.gapMin=1e-4;
+
+%% 轨道不平顺
+trackAmplitude=0.003; trackFrequency=7;
+disturbanceStart=2; disturbanceEnd=4;
+tEnd=5; sampleTime=0.0005;
+tTrack=(0:sampleTime:tEnd)';
+active=(tTrack>=disturbanceStart & tTrack<=disturbanceEnd);
+zSame=zeros(size(tTrack));
+zSame(active)=trackAmplitude*sin(2*pi*trackFrequency*tTrack(active));
+track.t=tTrack; track.zLeft=zSame; track.zRight=zSame;
+
+%% 初始条件
+x0=zeros(16,1);
+x0(1)=zSame(1); x0(2)=zSame(1); x0(3)=0;
+x0(4:6)=0; x0(7:16)=0;
+
+%% 数值仿真
+options=odeset('RelTol',1e-6,'AbsTol',1e-9,'MaxStep',sampleTime);
+[t,x]=ode15s(@(t,x)symmetryDynamics(t,x,p,track),[0 tEnd],x0,options);
+
+%% 输出
+n=numel(t); gap1=zeros(n,1); gap2=zeros(n,1);
+a1=zeros(n,1); a2=zeros(n,1); i1=zeros(n,1); i2=zeros(n,1);
+for j=1:n
+    [~,out]=symmetryDynamics(t(j),x(j,:).',p,track);
+    gap1(j)=out.gap1; gap2(j)=out.gap2;
+    a1(j)=out.a1; a2(j)=out.a2;
+    i1(j)=out.current1; i2(j)=out.current2;
+end
+
+%% 响应
+figure('Color','w','Name','电磁铁响应');
+subplot(3,1,1); plot(t,gap1*1000,'b-','LineWidth',1.1);
+grid on; ylabel('间隙 (mm)'); legend('左电磁铁');
+subplot(3,1,2); plot(t,a1,'b-','LineWidth',1.1);
+grid on; ylabel('加速度 (m/s^2)');
+subplot(3,1,3); plot(t,i1,'b-','LineWidth',1.1);
+grid on; ylabel('电流 (A)'); xlabel('时间 (s)');
+
+%% 系统动力学
+function [dx,out]=symmetryDynamics(t,x,p,track)
+    zL=interp1(track.t,track.zLeft,t,'linear','extrap');
+    zR=interp1(track.t,track.zRight,t,'linear','extrap');
+    x1=x(1); x2=x(2); x3=x(3); v1=x(4); v2=x(5); v3=x(6);
+    aLP1=x(7); aHS1=x(8); vH1=x(9); xH1=x(10);
+    aLP2=x(11); aHS2=x(12); vH2=x(13); xH2=x(14);
+    gapF1=x(15); gapF2=x(16);
+    aF1=aLP1-aHS1; aF2=aLP2-aHS2;
+    obsErr1=xH1-gapF1; obsErr2=xH2-gapF2;
+    % 由 omega0、zeta 直接形成二阶观测器校正增益
+    aObs1=aF1-p.omega0^2*obsErr1;
+    aObs2=aF2-p.omega0^2*obsErr2;
+    vObs1=vH1-2*p.zeta*p.omega0*obsErr1;
+    vObs2=vH2-2*p.zeta*p.omega0*obsErr2;
+    di1=p.Ka*aObs1+p.Kv*vObs1+p.Kp*xH1;
+    di2=p.Ka*aObs2+p.Kv*vObs2+p.Kp*xH2;
+    gap1=max(p.delta0+x1-zL,p.gapMin);
+    gap2=max(p.delta0+x2-zR,p.gapMin);
+    current1=min(max(p.i0+di1,p.Imin),p.Imax);
+    current2=min(max(p.i0+di2,p.Imin),p.Imax);
+    Fm1=p.mu0*p.N^2*p.Area*current1^2/(4*gap1^2);
+    Fm2=p.mu0*p.N^2*p.Area*current2^2/(4*gap2^2);
+    Feq=(p.m1+p.m2+p.m3+p.m4)*p.g/2;
+    a1=(-(Fm1-Feq)-p.c*(v1-v3)-p.k*(x1-x3))/p.m1;
+    a2=(-(Fm2-Feq)-p.c*(v2-v3)-p.k*(x2-x3))/p.m2;
+    a3=(p.c*(v1-v3)+p.k*(x1-x3)+p.c*(v2-v3)+p.k*(x2-x3))/(p.m3+p.m4);
+    daLP1=(a1-aLP1)/p.T1a; daHS1=(aLP1-aHS1)/p.TH;
+    daLP2=(a2-aLP2)/p.T1a; daHS2=(aLP2-aHS2)/p.TH;
+    dvH1=aObs1; dxH1=vObs1; dvH2=aObs2; dxH2=vObs2;
+    dGapF1=((x1-zL)-gapF1)/p.T2; dGapF2=((x2-zR)-gapF2)/p.T2;
+    dx=[v1;v2;v3;a1;a2;a3;daLP1;daHS1;dvH1;dxH1;daLP2;daHS2;dvH2;dxH2;dGapF1;dGapF2];
+    out=struct('gap1',gap1,'gap2',gap2,'a1',a1,'a2',a2,'current1',current1,'current2',current2);
+end

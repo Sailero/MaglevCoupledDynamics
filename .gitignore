@@ -12,4 +12,6 @@ data/**
 !data/.gitkeep
 !data/example/
 !data/example/**
+!data/legacy_v1/
+!data/legacy_v1/**
 .DS_Store

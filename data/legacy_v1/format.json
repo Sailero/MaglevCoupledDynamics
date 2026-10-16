@@ -1,0 +1,11 @@
+{
+  "model_version": "gap_pid_modal_v1",
+  "source_commit": "94b8913",
+  "description": "Archived single-point, two-mass model with three-column Y and two-column U. Retained for provenance; the default two-point generator writes stationary_two_point_v2.",
+  "Y_names": ["z_car", "z_magnet", "beam_displacement_at_magnet"],
+  "U_names": ["irregularity", "force_P"],
+  "n_samples": 100,
+  "n_steps": 1000,
+  "dt_s": 0.001,
+  "time_span_s": [0.0, 0.999]
+}
