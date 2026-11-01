@@ -1,0 +1,318 @@
+{
+  "model_version": "stationary_two_point_v2",
+  "case_order": [
+    "stable",
+    "self_excited"
+  ],
+  "same_initial_state": true,
+  "external_force_zero": true,
+  "units": "SI; plot uses micrometres",
+  "source_sha256": {
+    "sim\\model.py": "89057738a1fe6be48fb6bda8957ab995f538fc71e36252f87612cfd19e107415",
+    "sim\\solver.py": "dfbdcb0cb979be84c75171dddfd223a9bef138ff824a91b3e8d8e4ca40db1d5f"
+  },
+  "initial_state": [
+    -1.3753949938835243e-05,
+    1.0366591657609076e-05,
+    2.8826042099494687e-08,
+    0.0,
+    0.0,
+    0.0,
+    -1.915440874331477e-05,
+    -1.2155411769132844e-05,
+    0.0,
+    0.0,
+    25.042961588229478,
+    25.042961588229478
+  ],
+  "cases": [
+    {
+      "gain_v_a": 80.0,
+      "fit": {
+        "linear_eigenvalue": [
+          -1.61463684644578,
+          63.49288869759311
+        ],
+        "linear_frequency_hz": 10.105207087405477,
+        "projected_alpha_per_s": -1.6146368371527726,
+        "projected_frequency_hz": 10.105207089662352,
+        "alpha_absolute_error_per_s": 9.293007474653336e-09,
+        "frequency_absolute_error_hz": 2.2568755753127334e-09,
+        "ordinary_signal_fit": {
+          "signal": "q1_absolute_peaks",
+          "n_peaks": 151,
+          "alpha_per_s": -1.6146607379346392,
+          "frequency_hz": 10.106454655706779
+        },
+        "projection_eigenvector_condition": 12.808008560120136,
+        "fit_start_s": 2.0,
+        "fit_end_s": 9.5,
+        "fit_n_samples": 7501
+      },
+      "gap_min_mm": 9.973742851398432,
+      "gap_max_mm": 10.023698405733578,
+      "config": {
+        "meta": {
+          "model_version": "stationary_two_point_v2",
+          "parameter_source": "Wang_mechanics_Li_control_attachment_parameters",
+          "notes": "三自由度机械与 Li 电流回路的组合算例。m3 采用附件 330 kg；王珊表1为450 kg。",
+          "sources": {
+            "mechanics": "Wang et al. 2026, DOI:10.16385/j.cnki.issn.1004-4523.202508057, Eq.(3)",
+            "circuit_and_beam": "Li et al. 2015, DOI:10.1155/2015/709583, Eqs.(6)-(19)",
+            "parameters": "docs/references/two_point_original_matlab.txt；MATLAB R2024a与独立SciPy基线已核对，m3采用330 kg",
+            "beam": "original repository 11098d1: L=24 m, mu=400 kg/m, EI=1.68e9 N m^2",
+            "positions": "本项目计算选择；点1为后点、点2为前点"
+          }
+        },
+        "geometry": {
+          "positions_m": [
+            9.6,
+            14.4
+          ]
+        },
+        "vehicle": {
+          "m1_kg": 300.0,
+          "m2_kg": 300.0,
+          "m3_kg": 330.0,
+          "m4_kg": 2437.5,
+          "stiffness_n_m": [
+            20000000.0,
+            20000000.0
+          ],
+          "damping_ns_m": [
+            5000.0,
+            5000.0
+          ],
+          "gravity": 9.81
+        },
+        "beam": {
+          "enabled": true,
+          "n_modes": 2,
+          "length_m": 24.0,
+          "mass_per_length": 400.0,
+          "f1_hz": 5.588844660540809,
+          "damping_ratio": 0.02
+        },
+        "magnet": {
+          "mu0": 1.2566370614359173e-06,
+          "turns": 270,
+          "pole_area_m2": 0.115,
+          "gap_m": 0.01,
+          "gap_min_m": 0.001,
+          "gap_max_m": 0.025,
+          "gap_floor_m": 1e-06,
+          "current_min_a": 0.0,
+          "current_max_a": 60.0
+        },
+        "controller": {
+          "kp_a_m": 5500.0,
+          "kd_as_m": 50.0,
+          "current_gain_v_a": 80.0
+        },
+        "time": {
+          "dt": 0.001,
+          "n_steps": 10001
+        },
+        "integrator": {
+          "method": "Radau",
+          "rtol": 1e-08,
+          "scaled_atol": 1e-11,
+          "max_step": 0.0005
+        },
+        "initial": {
+          "offsets": {},
+          "random_std": {
+            "z_m1": 1e-05,
+            "z_m2": 1e-05,
+            "z_c": 1e-05,
+            "q1": 1e-05,
+            "q2": 1e-05
+          }
+        },
+        "excitation": {
+          "type": "none",
+          "amplitudes_n": [
+            0.0,
+            0.0
+          ],
+          "start_s": 2.0,
+          "duration_s": 0.1
+        },
+        "dataset": {
+          "name": "stationary_two_point",
+          "n_samples": 4,
+          "seed": 20261016,
+          "dtype": "float64",
+          "plot": true,
+          "split_fractions": [
+            0.7,
+            0.15,
+            0.15
+          ],
+          "split_seed": 20261016,
+          "split_by": "trajectory",
+          "parameter_ranges": {},
+          "n_parameter_families": 4
+        },
+        "validation": {
+          "model": true,
+          "solver": true,
+          "dataset": true,
+          "scientific": true,
+          "duration_s": 10.0,
+          "fit_start_s": 2.0,
+          "fit_end_s": 9.5,
+          "gains_v_a": [
+            65.0,
+            80.0
+          ],
+          "seed": 20261016
+        }
+      }
+    },
+    {
+      "gain_v_a": 65.0,
+      "fit": {
+        "linear_eigenvalue": [
+          0.2258298458337228,
+          62.71627451278433
+        ],
+        "linear_frequency_hz": 9.981605101017877,
+        "projected_alpha_per_s": 0.2258750877222905,
+        "projected_frequency_hz": 9.981534234618747,
+        "alpha_absolute_error_per_s": 4.524188856772082e-05,
+        "frequency_absolute_error_hz": 7.086639912934345e-05,
+        "ordinary_signal_fit": {
+          "signal": "q1_absolute_peaks",
+          "n_peaks": 150,
+          "alpha_per_s": 0.22588140866146078,
+          "frequency_hz": 9.981243301178992
+        },
+        "projection_eigenvector_condition": 11.91878481145402,
+        "fit_start_s": 2.0,
+        "fit_end_s": 9.5,
+        "fit_n_samples": 7501
+      },
+      "gap_min_mm": 9.837088837792281,
+      "gap_max_mm": 10.162169512211353,
+      "config": {
+        "meta": {
+          "model_version": "stationary_two_point_v2",
+          "parameter_source": "Wang_mechanics_Li_control_attachment_parameters",
+          "notes": "三自由度机械与 Li 电流回路的组合算例。m3 采用附件 330 kg；王珊表1为450 kg。",
+          "sources": {
+            "mechanics": "Wang et al. 2026, DOI:10.16385/j.cnki.issn.1004-4523.202508057, Eq.(3)",
+            "circuit_and_beam": "Li et al. 2015, DOI:10.1155/2015/709583, Eqs.(6)-(19)",
+            "parameters": "docs/references/two_point_original_matlab.txt；MATLAB R2024a与独立SciPy基线已核对，m3采用330 kg",
+            "beam": "original repository 11098d1: L=24 m, mu=400 kg/m, EI=1.68e9 N m^2",
+            "positions": "本项目计算选择；点1为后点、点2为前点"
+          }
+        },
+        "geometry": {
+          "positions_m": [
+            9.6,
+            14.4
+          ]
+        },
+        "vehicle": {
+          "m1_kg": 300.0,
+          "m2_kg": 300.0,
+          "m3_kg": 330.0,
+          "m4_kg": 2437.5,
+          "stiffness_n_m": [
+            20000000.0,
+            20000000.0
+          ],
+          "damping_ns_m": [
+            5000.0,
+            5000.0
+          ],
+          "gravity": 9.81
+        },
+        "beam": {
+          "enabled": true,
+          "n_modes": 2,
+          "length_m": 24.0,
+          "mass_per_length": 400.0,
+          "f1_hz": 5.588844660540809,
+          "damping_ratio": 0.02
+        },
+        "magnet": {
+          "mu0": 1.2566370614359173e-06,
+          "turns": 270,
+          "pole_area_m2": 0.115,
+          "gap_m": 0.01,
+          "gap_min_m": 0.001,
+          "gap_max_m": 0.025,
+          "gap_floor_m": 1e-06,
+          "current_min_a": 0.0,
+          "current_max_a": 60.0
+        },
+        "controller": {
+          "kp_a_m": 5500.0,
+          "kd_as_m": 50.0,
+          "current_gain_v_a": 65.0
+        },
+        "time": {
+          "dt": 0.001,
+          "n_steps": 10001
+        },
+        "integrator": {
+          "method": "Radau",
+          "rtol": 1e-08,
+          "scaled_atol": 1e-11,
+          "max_step": 0.0005
+        },
+        "initial": {
+          "offsets": {},
+          "random_std": {
+            "z_m1": 1e-05,
+            "z_m2": 1e-05,
+            "z_c": 1e-05,
+            "q1": 1e-05,
+            "q2": 1e-05
+          }
+        },
+        "excitation": {
+          "type": "none",
+          "amplitudes_n": [
+            0.0,
+            0.0
+          ],
+          "start_s": 2.0,
+          "duration_s": 0.1
+        },
+        "dataset": {
+          "name": "stationary_two_point",
+          "n_samples": 4,
+          "seed": 20261016,
+          "dtype": "float64",
+          "plot": true,
+          "split_fractions": [
+            0.7,
+            0.15,
+            0.15
+          ],
+          "split_seed": 20261016,
+          "split_by": "trajectory",
+          "parameter_ranges": {},
+          "n_parameter_families": 4
+        },
+        "validation": {
+          "model": true,
+          "solver": true,
+          "dataset": true,
+          "scientific": true,
+          "duration_s": 10.0,
+          "fit_start_s": 2.0,
+          "fit_end_s": 9.5,
+          "gains_v_a": [
+            65.0,
+            80.0
+          ],
+          "seed": 20261016
+        }
+      }
+    }
+  ]
+}
